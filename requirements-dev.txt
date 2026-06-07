@@ -1,4 +1,4 @@
 # Development + CI tooling (not needed to run the project).
 -r requirements.txt
 pytest>=8.0
-ruff>=0.6
+ruff>=0.15.16
