@@ -29,6 +29,24 @@ own training data. Understand these properties before deploying it more widely:
   repo using your existing GitHub login. For least privilege, swap it for a
   read-only, single-repo fine-grained token (see README -> Hardening).
 
+## If your connector URL leaks, rotate the secret
+
+The URL is the only key to your data. If it is ever exposed (shared by mistake,
+caught in a screenshot, pasted somewhere public), rotate it. This invalidates the
+old URL immediately:
+
+1. From your repo folder, drop the saved secret and URL so a fresh one is minted:
+   ```bash
+   rm -f .mcp_secret .connector_url
+   ```
+2. Rerun the installer; it generates a new secret, redeploys, and prints the new
+   URL:
+   ```bash
+   ./setup.sh
+   ```
+3. In Claude and/or ChatGPT, remove the old Slipstream connector and add the new
+   URL. The previous URL now returns 404 to everyone, including whoever had it.
+
 ## Supply chain
 
 - The Garmin fetch uses the community `python-garminconnect` library (there is no

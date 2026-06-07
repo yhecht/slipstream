@@ -76,23 +76,29 @@ don't have one), and **Claude** and/or **ChatGPT**. Plus `python3`,
    then prints (and copies to your clipboard) your **connector URL**. It's safe
    to re-run; it resumes where it left off.
 3. **Paste the URL** into Claude and/or ChatGPT (it opens the page and shows the
-   exact clicks). Ask it something. Done.
+   exact clicks; full guide in [`docs/CONNECT.md`](docs/CONNECT.md)). Ask it
+   something. Done.
 
 That's it. From then on your data refreshes automatically every few hours.
 
 ## Connecting the assistants
 
-The installer prints your URL and these steps, but for reference:
+The installer prints your URL and the steps. For the full click-by-click
+walk-through, including the easy-to-miss bits, see
+[**`docs/CONNECT.md`**](docs/CONNECT.md). In short:
 
-**Claude** (claude.ai - syncs to the mobile app)
+**Claude** (free plan; claude.ai, syncs to the mobile app)
 > Settings → Connectors → **Add custom connector** → paste the URL (leave the
-> OAuth fields blank) → **Add** → **Connect**. Then enable it in your chat.
+> OAuth fields blank) → **Add** → **Connect**. Then **enable it in your chat**
+> using the `+` / tools control next to the message box.
 
-**ChatGPT** (requires Plus/Pro; on the web)
+**ChatGPT** (paid plan; on the web)
 > Settings → Apps & Connectors → Advanced → enable **Developer mode** →
-> **Create** → paste the URL → Authentication: **No authentication** → **Create**.
+> **Create** → paste the URL → set Authentication to **No authentication** (it
+> defaults to OAuth, which won't work) → tick the consent box → **Create**.
+> Then, in a chat, **`+` → More → Slipstream** to switch it on.
 
-> **Always _paste_ the URL - never type it.** It ends in a long random secret;
+> **Always _paste_ the URL, never type it.** It ends in a long random secret;
 > one wrong character and it won't connect.
 
 ## Privacy & security
@@ -144,6 +150,7 @@ in [**`docs/FAQ.md`**](docs/FAQ.md).
 
 ## Documentation
 
+- [Connecting Claude & ChatGPT](docs/CONNECT.md) - click-by-click setup for both
 - [Architecture](docs/ARCHITECTURE.md) - how it is built and the data flow
 - [Troubleshooting](docs/TROUBLESHOOTING.md) - every common issue, by area
 - [FAQ](docs/FAQ.md) - cost, privacy, comparisons, limits

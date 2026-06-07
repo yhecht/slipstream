@@ -13,6 +13,7 @@ worker/worker-configuration.d.ts
 .dev.vars
 *.token
 .mcp_secret
+.connector_url
 garmin_tokens*.txt
 .garminconnect/
 .garmintokens/

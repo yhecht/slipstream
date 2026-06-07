@@ -173,20 +173,40 @@ In Settings -> Connectors -> your connector, set the tools to **Always allow**.
 
 ## ChatGPT
 
+The click-by-click version with screenshots-in-words is in
+[CONNECT.md](CONNECT.md#chatgpt). Common snags:
+
 **I don't see "Developer mode".**
 It requires a paid plan (Plus, Pro, Business, Enterprise, or Edu) and is on the
-**web** (Settings -> Apps & Connectors -> Advanced). It is a beta, so it may roll
-out gradually.
+**web** (Settings -> Apps & Connectors -> Advanced settings). It is a beta, so it
+may roll out gradually.
 
-**Adding the connector fails.**
-Paste the full URL (do not type it) and set Authentication to **No
-authentication**. If it still fails, open the URL in a browser; you should see a
-short "connector is running" message, which confirms the Worker is up.
+**Adding the connector fails or shows an auth error.**
+Two causes, in order of likelihood:
+1. **Authentication is still set to OAuth.** It defaults to OAuth; change the
+   dropdown to **No authentication**. This connector has no OAuth, so OAuth fails.
+2. **The URL is mistyped.** Paste it, never type it. To sanity-check the Worker,
+   open the base URL (up to `.workers.dev/`) in a browser; a short "connector is
+   running" message means the deploy is fine and the issue is in the form.
 
-**ChatGPT won't use the connector.**
-Make sure the connector is enabled for the conversation, and ask explicitly, for
-example "Using Slipstream, ...". Mobile support for developer-mode connectors can
-lag the web; if it is missing on your phone, use the web app.
+Also remember to tick the **"I understand and want to continue"** consent box, or
+the **Create** button stays disabled.
+
+**The "elevated risk" warning worries me.**
+That red note appears for every custom connector, regardless of what it does. It
+is not specific to Slipstream, which is read-only and exposes only summaries (no
+GPS, no account access). It cannot delete or change anything.
+
+**I added it, but ChatGPT ignores it or says it has no data.**
+Developer-mode connectors are **not** on by default in a chat. Switch it on per
+conversation: click **`+`**, then **More**, then **Slipstream**. Then ask
+explicitly, for example "Using Slipstream, ...". You know it works when it returns
+real numbers. Mobile support for these connectors can lag the web; if it is
+missing on your phone, use the web app.
+
+**A "DEV" badge shows on the connector.**
+That is expected. It means "developer-mode, unverified", which every self-added
+connector is. It does not affect how it works.
 
 ---
 

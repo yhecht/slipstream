@@ -154,23 +154,27 @@ if [ -n "$SUB" ]; then
       || warn "Deployed; the live check didn't confirm yet (usually just needs a few seconds)."
 fi
 
-# Put the URL on the clipboard if we can, and open the Claude connectors page.
+# Save the URL next to the repo (gitignored), copy it, and open the Claude page.
+[ -n "$SUB" ] && printf "%s" "$CONNECTOR_URL" > .connector_url
 command -v pbcopy >/dev/null 2>&1 && printf "%s" "$CONNECTOR_URL" | pbcopy && COPIED=" (copied to your clipboard)" || COPIED=""
 open_url "https://claude.ai/settings/connectors"
 
 cat <<EOF
 
-${GREEN}${BOLD}Done!${RESET} Your private connector URL${COPIED} - treat it like a password:
+${GREEN}${BOLD}Done!${RESET} Your private connector URL${COPIED} - treat it like a password
+(also saved to ${BOLD}.connector_url${RESET} in this folder if you need it again):
 
   ${CYAN}${CONNECTOR_URL}${RESET}
 
-${BOLD}Claude${RESET} (page opened in your browser; syncs to the phone app):
-  Connectors → Add custom connector → ${BOLD}paste${RESET} the URL (leave OAuth blank) → Add → Connect.
+${BOLD}Claude${RESET} (free; page opened in your browser; syncs to the phone app):
+  1. Connectors → Add custom connector → ${BOLD}paste${RESET} the URL (leave OAuth blank) → Add → Connect.
+  2. In a chat, open the ${BOLD}+${RESET} / tools control and turn ${BOLD}Slipstream${RESET} on.
 
-${BOLD}ChatGPT${RESET} (needs Plus/Pro; web):
-  Settings → Apps & Connectors → Advanced → enable ${BOLD}Developer mode${RESET} →
-  Create → paste the URL → Authentication: ${BOLD}No authentication${RESET} → Create.
+${BOLD}ChatGPT${RESET} (paid plan; web - https://chatgpt.com/#settings/Connectors ):
+  1. Settings → Apps & Connectors → Advanced → enable ${BOLD}Developer mode${RESET}.
+  2. Create → paste the URL → Authentication: ${BOLD}No authentication${RESET} (not OAuth) → tick consent → Create.
+  3. In a chat, ${BOLD}+ → More → Slipstream${RESET} to switch it on.
 
 ${DIM}Paste the URL, don't type it. Then ask: "Using Slipstream, how far did I run this month?"
-Re-running ./setup.sh later is safe - it resumes and keeps the same URL.${RESET}
+Full click-by-click guide: ${BOLD}docs/CONNECT.md${RESET}. Re-running ./setup.sh is safe; it keeps the same URL.${RESET}
 EOF

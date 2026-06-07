@@ -1,6 +1,7 @@
 # FAQ
 
-The 20 questions people ask most about Slipstream.
+The questions people ask most about Slipstream. For click-by-click setup, see
+[CONNECT.md](CONNECT.md); for fixes, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 
 ### 1. What is Slipstream, in one sentence?
 A small, self-hosted pipeline that pulls your Garmin activities on a schedule and
@@ -49,8 +50,11 @@ Yes. Add the connector once on claude.ai and it appears in the Claude iPhone and
 Android apps. ChatGPT's developer-mode connectors are currently web-first.
 
 ### 11. Does it work with ChatGPT too?
-Yes, the same connector URL. ChatGPT needs **Developer mode** enabled (a paid
-plan, on the web). See the README for the exact steps.
+Yes, the same connector URL. ChatGPT needs a **paid plan** and **Developer mode**
+enabled (on the web). Two things trip people up: set Authentication to **No
+authentication** (it defaults to OAuth, which fails), and after adding it, switch
+it on per chat with **`+` -> More -> Slipstream**. Full steps in
+[CONNECT.md](CONNECT.md#chatgpt).
 
 ### 12. What can I actually ask it?
 Anything about your training: weekly mileage, longest ride, pace trends, training
@@ -94,6 +98,28 @@ Update: `git pull` and rerun `./setup.sh` (it resumes). Harden: swap the data
 token for a read-only one (README -> Hardening). Remove: delete the Cloudflare
 Worker (`cd worker && npx wrangler delete`), remove the connector in your Claude /
 ChatGPT settings, and delete or archive the repo.
+
+### 21. I added the connector, but the assistant acts like it isn't there.
+Almost always because it is not switched on **for that conversation**. Adding a
+connector in settings makes it available; you still enable it per chat. In Claude,
+use the `+` / tools control by the message box; in ChatGPT, click `+` -> More ->
+Slipstream. Then ask "Using Slipstream, ...". Real numbers mean it is working.
+
+### 22. ChatGPT shows a "DEV" badge and an "elevated risk" warning. Is that bad?
+No. The "DEV" badge just means a developer-mode, unverified connector, which every
+self-added connector is. The risk warning is generic boilerplate shown for any
+custom connector. Slipstream is read-only and exposes only summaries, so it cannot
+delete or change anything.
+
+### 23. Do I have to set it up again on my phone or a second device?
+No. The connector is tied to your Claude or ChatGPT **account**, so it appears
+wherever you sign in (Claude syncs to its phone apps; ChatGPT is web-first today).
+You still flip it on per chat. If it has not appeared on a phone yet, force-quit
+and reopen the app to sync.
+
+### 24. Is there a step-by-step guide for connecting?
+Yes: [CONNECT.md](CONNECT.md) walks through Claude and ChatGPT click by click,
+including the parts people miss.
 
 ---
 
