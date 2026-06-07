@@ -56,19 +56,19 @@ You'll need (all free): a **Garmin** account, a **GitHub** account, a
 **Cloudflare** account, and **Claude** and/or **ChatGPT**. Plus `python3`,
 `node`, `git`, and the [GitHub CLI](https://cli.github.com) (`gh`) on your machine.
 
-1. **Create your copy.** Click **“Use this template” → Create a new repository**,
-   and make it **Private** (it will hold your activity data).
-2. **Clone it** and run the installer:
+1. **Create your private copy and start the installer** - one command (needs the
+   [GitHub CLI](https://cli.github.com)):
    ```bash
-   git clone https://github.com/<you>/slipstream.git
-   cd slipstream
-   ./setup.sh
+   gh repo create slipstream --template yhecht/slipstream --private --clone && cd slipstream && ./setup.sh
    ```
-3. **Follow the prompts.** The installer walks you through Garmin login (2FA
-   included), the first data fetch, and the Cloudflare deploy - then prints your
-   **connector URL**.
-4. **Add the connector** to Claude and/or ChatGPT (the installer shows the exact
-   clicks). Ask it something. Done.
+   No `gh`? Click **“Use this template”** on GitHub (make it **Private**), clone
+   it, then run `./setup.sh`.
+2. **Follow the prompts.** The installer handles Garmin login (2FA), the first
+   data fetch, and the Cloudflare deploy - opening browser pages when needed -
+   then prints (and copies to your clipboard) your **connector URL**. It's safe
+   to re-run; it resumes where it left off.
+3. **Paste the URL** into Claude and/or ChatGPT (it opens the page and shows the
+   exact clicks). Ask it something. Done.
 
 That's it. From then on your data refreshes automatically every few hours.
 
@@ -94,9 +94,25 @@ The installer prints your URL and these steps, but for reference:
   summaries (distance, duration, heart rate, sport, etc.).
 - The connector lives at an **unguessable URL** (a long random path). Treat that
   URL like a password - it's the only key to your data.
-- The Worker reads your repo with a **read-only, single-repo GitHub token**.
 - Your Garmin **password is never stored** - login mints a refreshable session
   token that lives only as encrypted secrets.
+- For the simplest setup the Worker reads your data repo using your existing
+  GitHub login. Want least-privilege instead? Swap it for a read-only token
+  (see **Hardening** below).
+
+### Hardening (optional)
+
+Replace the data-read credential with a **read-only, single-repo** token:
+
+1. Create a fine-grained token at <https://github.com/settings/personal-access-tokens/new>
+   - Repository access: **Only select repositories** -> your `slipstream` repo
+   - Permissions -> Repository -> **Contents** -> **Read-only**
+2. Store it on the Worker:
+   ```bash
+   cd worker && printf "%s" "<your-token>" | npx wrangler secret put GITHUB_TOKEN
+   ```
+
+Now, even in a worst case, the connector can only ever *read* your activity data.
 
 ## Keeping data fresh
 

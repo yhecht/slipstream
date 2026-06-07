@@ -12,6 +12,7 @@ worker/worker-configuration.d.ts
 .env
 .dev.vars
 *.token
+.mcp_secret
 garmin_tokens*.txt
 .garminconnect/
 .garmintokens/
