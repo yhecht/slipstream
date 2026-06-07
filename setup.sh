@@ -88,14 +88,23 @@ gh workflow run refresh.yml -R "$REPO" >/dev/null 2>&1 \
   || warn "Open the repo's Actions tab once to enable Actions, then: gh workflow run refresh.yml"
 
 # --------------------------------------------------------------------------
-step "5/6  Cloudflare (free host for the connector)"
-say "Sign in with Cloudflare in your browser when prompted. No account? Sign up"
-say "free (use 'Continue with GitHub') - opening it now; skip if you have one:"
-say "  ${CYAN}https://dash.cloudflare.com/sign-up${RESET}"
-open_url "https://dash.cloudflare.com/sign-up"
-read -r -p "Press Enter when ready to sign in to Cloudflare… " _ || true
+step "5/6  Cloudflare (free host - where your connector lives)"
 ( cd worker && npm install --silent )
-( cd worker && npx wrangler login )
+if ( cd worker && npx wrangler whoami >/dev/null 2>&1 ); then
+  ok "Already signed in to Cloudflare."
+else
+  read -r -p "Do you already have a Cloudflare account? [y/N] " HAVE_CF || HAVE_CF=""
+  if [ "$HAVE_CF" != "y" ] && [ "$HAVE_CF" != "Y" ]; then
+    say "No problem - it's free and takes about a minute. Opening the sign-up page now."
+    say "${BOLD}Tip: click 'Continue with GitHub'${RESET} - fastest, and no new password."
+    open_url "https://dash.cloudflare.com/sign-up"
+    say "  ${CYAN}https://dash.cloudflare.com/sign-up${RESET}"
+    say "Create the account, ${BOLD}verify your email if it asks${RESET}, then come back here."
+    read -r -p "Press Enter once your Cloudflare account is ready… " _ || true
+  fi
+  say "Now I'll connect to Cloudflare - a browser window opens; click ${BOLD}Allow${RESET}."
+  ( cd worker && npx wrangler login )
+fi
 
 # Auto-register a workers.dev subdomain via the API (skips a manual dashboard step).
 CF_TOKEN=""

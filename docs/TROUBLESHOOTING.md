@@ -37,6 +37,12 @@ Check progress with `gh run watch`.
 
 ## Cloudflare
 
+**I don't have a Cloudflare account.**
+No problem - it's free. The installer asks, then opens the sign-up page for you.
+Choose **Continue with GitHub** for the fastest path (no new password), create the
+account, verify your email if prompted, then return to the terminal and press
+Enter. A brand-new account works right away.
+
 **`You need a workers.dev subdomain` during deploy.**
 Cloudflare only assigns your free web address after you open the Workers section
 once. The installer tries to register it automatically; if that didn't work, open

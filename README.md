@@ -53,7 +53,8 @@ Everything runs on free tiers and your own accounts. There is no shared backend.
 ## Quick start
 
 You'll need (all free): a **Garmin** account, a **GitHub** account, a
-**Cloudflare** account, and **Claude** and/or **ChatGPT**. Plus `python3`,
+**Cloudflare** account (free; the installer walks you through signup if you
+don't have one), and **Claude** and/or **ChatGPT**. Plus `python3`,
 `node`, `git`, and the [GitHub CLI](https://cli.github.com) (`gh`) on your machine.
 
 1. **Create your private copy and start the installer** - one command (needs the
