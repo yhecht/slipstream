@@ -1,0 +1,26 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node / Cloudflare
+node_modules/
+.wrangler/
+worker/worker-configuration.d.ts
+
+# Secrets & tokens - NEVER commit these
+.env
+.dev.vars
+*.token
+.mcp_secret
+.connector_url
+garmin_tokens*.txt
+.garminconnect/
+.garmintokens/
+
+# Local scratch
+*.local
+
+# NOTE: data/ is intentionally NOT ignored - the scheduled Action commits your
+# activity summaries there so the connector can read them. (Your data lives in
+# your own PRIVATE repo, not in this public template.)

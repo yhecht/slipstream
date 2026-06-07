@@ -1,0 +1,5 @@
+# Runtime dependencies. Pinned to a compatible range so an upstream change can't
+# silently break every install at once; Dependabot proposes deliberate bumps.
+# garminconnect is a community library (there is no official individual Garmin
+# API); if Garmin changes their login, bump this (see docs/TROUBLESHOOTING.md).
+garminconnect>=0.3.5,<1.0
