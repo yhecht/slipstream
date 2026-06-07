@@ -1,0 +1,42 @@
+name: Refresh fitness data
+
+# Pulls your latest Garmin activities on a schedule and on-demand (the on-demand
+# trigger is what a phone shortcut can fire). Commits the result to data/.
+on:
+  schedule:
+    - cron: "0 */6 * * *"      # every 6 hours
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-fitness
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      DAYS_BACK: "30"
+      GARMINTOKENS: ${{ secrets.GARMINTOKENS }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Fetch + write data/
+        run: python -m pipeline.fetch --days "$DAYS_BACK"
+      - name: Commit refreshed data
+        run: |
+          git config user.name "slipstream-bot"
+          git config user.email "slipstream-bot@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "data refresh $(date -u +%FT%TZ)"
+            git push
+          fi
