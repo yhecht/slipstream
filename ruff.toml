@@ -1,0 +1,7 @@
+# Ruff: linter + formatter for the Python pipeline.
+line-length = 100
+target-version = "py310"
+
+[lint]
+select = ["E", "F", "I", "UP", "B"]  # pycodestyle, pyflakes, isort, pyupgrade, bugbear
+ignore = ["E501"]                     # line length handled by the formatter

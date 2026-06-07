@@ -5,7 +5,9 @@
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "typecheck": "wrangler types && tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
@@ -14,6 +16,7 @@
   },
   "devDependencies": {
     "typescript": "^5.5.2",
+    "vitest": "^3.2.0",
     "wrangler": "^4.98.0"
   }
 }

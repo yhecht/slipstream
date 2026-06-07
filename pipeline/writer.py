@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Optional
 
 from .schema import Activity
 
@@ -23,7 +22,7 @@ def _num(v, ndigits):
     return int(r) if r == int(r) else r
 
 
-def _avg_speed_ms(a: Activity) -> Optional[float]:
+def _avg_speed_ms(a: Activity) -> float | None:
     if a.distance_km and a.moving_s:
         return (a.distance_km * 1000.0) / a.moving_s
     return None

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Optional
 
 # Map Garmin's many sport keys onto a tidy family for display/filtering.
 _SPORT_FAMILY = {
@@ -26,7 +25,7 @@ _SPORT_FAMILY = {
 _KNOWN = {"run", "ride", "swim", "walk", "hike", "row", "strength", "workout", "yoga", "climb"}
 
 
-def canonical_sport(raw_type: Optional[str]) -> str:
+def canonical_sport(raw_type: str | None) -> str:
     if not raw_type:
         return "other"
     key = str(raw_type).strip().lower().replace(" ", "_").replace("-", "_")
@@ -35,7 +34,7 @@ def canonical_sport(raw_type: Optional[str]) -> str:
     return key if key in _KNOWN else "other"
 
 
-def to_utc(dt: Optional[datetime]) -> Optional[datetime]:
+def to_utc(dt: datetime | None) -> datetime | None:
     if dt is None:
         return None
     return dt.replace(tzinfo=timezone.utc) if dt.tzinfo is None else dt.astimezone(timezone.utc)
@@ -45,19 +44,19 @@ def to_utc(dt: Optional[datetime]) -> Optional[datetime]:
 class Activity:
     source: str
     source_id: str
-    start: Optional[datetime]
+    start: datetime | None
     sport: str
-    raw_sport: Optional[str] = None
-    name: Optional[str] = None
-    distance_km: Optional[float] = None
-    moving_s: Optional[int] = None
-    elapsed_s: Optional[int] = None
-    elevation_gain_m: Optional[float] = None
-    avg_hr: Optional[float] = None
-    max_hr: Optional[float] = None
-    avg_watts: Optional[float] = None
-    calories: Optional[float] = None
-    track_file: Optional[str] = None
+    raw_sport: str | None = None
+    name: str | None = None
+    distance_km: float | None = None
+    moving_s: int | None = None
+    elapsed_s: int | None = None
+    elevation_gain_m: float | None = None
+    avg_hr: float | None = None
+    max_hr: float | None = None
+    avg_watts: float | None = None
+    calories: float | None = None
+    track_file: str | None = None
 
     def __post_init__(self):
         self.start = to_utc(self.start)

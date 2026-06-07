@@ -1,5 +1,8 @@
 # 🏃 Slipstream
 
+[![CI](https://github.com/yhecht/slipstream/actions/workflows/ci.yml/badge.svg)](https://github.com/yhecht/slipstream/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 **Chat with your Garmin training data in Claude and ChatGPT - free, self-hosted, and private.**
 
 Slipstream is a small, self-installing pipeline that pulls your Garmin activities
@@ -138,6 +141,16 @@ ChatGPT (plus things outside this project's control) is covered in
 [**`docs/TROUBLESHOOTING.md`**](docs/TROUBLESHOOTING.md). Broader questions
 (cost, privacy, how it compares to Strava's MCP, supported devices) are answered
 in [**`docs/FAQ.md`**](docs/FAQ.md).
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md) - how it is built and the data flow
+- [Troubleshooting](docs/TROUBLESHOOTING.md) - every common issue, by area
+- [FAQ](docs/FAQ.md) - cost, privacy, comparisons, limits
+- [Example prompts](docs/PROMPTS.md) - what to ask, by use case
+- [Phone trigger](docs/PHONE_TRIGGER.md) - one-tap refresh from your phone
+- [Security policy](SECURITY.md) - posture, reporting, and known limitations
+- [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## How it's built
 

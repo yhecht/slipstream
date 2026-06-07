@@ -9,7 +9,6 @@ from __future__ import annotations
 import os
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from typing import Optional
 
 from ..schema import Activity, canonical_sport
 
@@ -28,7 +27,7 @@ def _login():
     )
 
 
-def _parse_start(raw: dict) -> Optional[datetime]:
+def _parse_start(raw: dict) -> datetime | None:
     s = raw.get("startTimeGMT")  # "2024-08-18 13:00:00" in UTC
     if not s:
         return None
@@ -38,7 +37,7 @@ def _parse_start(raw: dict) -> Optional[datetime]:
         return None
 
 
-def _download_track(g, activity_id, data_dir: str) -> Optional[str]:
+def _download_track(g, activity_id, data_dir: str) -> str | None:
     rel = f"tracks/garmin-{activity_id}.gpx"
     if Path(data_dir, rel).exists():
         return rel  # already have it - refreshes stay incremental
