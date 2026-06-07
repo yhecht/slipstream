@@ -15,8 +15,8 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "typescript": "^5.5.2",
-    "vitest": "^3.2.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8",
     "wrangler": "^4.98.0"
   }
 }
