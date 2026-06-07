@@ -25,6 +25,10 @@ Once connected, just talk to your data:
 - *"I want to run a bit longer than usual - is 12-14 km reasonable given my recent fitness?"*
 - *"Am I training more or less than last month?"*
 
+Want more ideas? [**`docs/PROMPTS.md`**](docs/PROMPTS.md) has dozens of example
+prompts and use cases, from race planning and readiness to recovery, heart-rate
+and fueling angles, and a "be my coach" mode.
+
 ## How it works
 
 ```
@@ -127,11 +131,13 @@ gh workflow run refresh.yml
 You can even wire this to a one-tap phone shortcut - see
 [`docs/PHONE_TRIGGER.md`](docs/PHONE_TRIGGER.md).
 
-## Troubleshooting
+## Troubleshooting and FAQ
 
-Hit a snag? The common ones (Garmin 2FA, rate limits, the Cloudflare subdomain
-step, connector not appearing) are all covered in
-[**`docs/TROUBLESHOOTING.md`**](docs/TROUBLESHOOTING.md).
+Hit a snag? Every common issue across Garmin, GitHub, Cloudflare, Claude, and
+ChatGPT (plus things outside this project's control) is covered in
+[**`docs/TROUBLESHOOTING.md`**](docs/TROUBLESHOOTING.md). Broader questions
+(cost, privacy, how it compares to Strava's MCP, supported devices) are answered
+in [**`docs/FAQ.md`**](docs/FAQ.md).
 
 ## How it's built
 
