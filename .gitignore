@@ -21,6 +21,9 @@ garmin_tokens*.txt
 # Local scratch
 *.local
 
+# Report generator scratch (charts are rebuilt on each run)
+reports/_img/
+
 # NOTE: data/ is intentionally NOT ignored - the scheduled Action commits your
 # activity summaries there so the connector can read them. (Your data lives in
 # your own PRIVATE repo, not in this public template.)
